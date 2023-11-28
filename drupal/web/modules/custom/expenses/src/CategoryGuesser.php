@@ -35,7 +35,7 @@ class CategoryGuesser {
   public function guess(string $text): ?TermInterface {
     foreach ($this->getCategories() as $category) {
       foreach ($category->field_synonyms->getValue() as $synonym) {
-        if (str_contains($text, $synonym['value'])) {
+        if (str_contains(strtolower($text), strtolower($synonym['value']))) {
           return $category;
         }
       }
