@@ -32,10 +32,10 @@ RUN mkdir -p /var/www/drupal/files /var/www/drupal/web/sites/default/files
 
 COPY 000-default.conf /etc/apache2/sites-enabled/
 
-COPY drupal/composer.json                   /var/www/drupal/
-COPY drupal/composer.lock                   /var/www/drupal/
-COPY drupal/config                          /var/www/drupal/
-COPY drupal/web/modules/custom              /var/www/drupal/web/modules/
+COPY drupal/composer.json                   /var/www/drupal/composer.json
+COPY drupal/composer.lock                   /var/www/drupal/composer.lock
+COPY drupal/config                          /var/www/drupal/config
+COPY drupal/web/modules/custom              /var/www/drupal/web/modules/custom
 COPY drupal/web/sites/default/settings.php  /var/www/drupal/web/sites/default/settings.php
 
 WORKDIR /var/www/drupal
