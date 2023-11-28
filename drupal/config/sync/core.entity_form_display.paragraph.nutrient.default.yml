@@ -1,0 +1,52 @@
+uuid: 8c03304d-2494-4a62-a325-94befbf7594e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.nutrient.field_amount
+    - field.field.paragraph.nutrient.field_nutrient
+    - field.field.paragraph.nutrient.field_unit
+    - paragraphs.paragraphs_type.nutrient
+  module:
+    - field_layout
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+id: paragraph.nutrient.default
+targetEntityType: paragraph
+bundle: nutrient
+mode: default
+content:
+  field_amount:
+    type: number
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_nutrient:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_unit:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

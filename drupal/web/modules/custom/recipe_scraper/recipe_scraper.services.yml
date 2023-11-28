@@ -1,0 +1,17 @@
+services:
+  recipe_scraper.ingredient_normalizer:
+    class: Drupal\recipe_scraper\IngredientNormalizer
+    arguments:
+      - '@ingredient.unit'
+  recipe_scraper.scraper:
+    class: Drupal\recipe_scraper\RecipeScraper
+    arguments:
+      - '@http_client'
+      - '@recipe_scraper.ingredient_normalizer'
+  recipe_scraper.recipe_transformer:
+    class: Drupal\recipe_scraper\RecipeTransformer
+    arguments:
+      - '@recipe_scraper.ingredient_normalizer'
+      - '@entity_type.manager'
+      - '@file.repository'
+      - '@current_user'

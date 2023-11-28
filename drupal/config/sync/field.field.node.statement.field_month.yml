@@ -1,0 +1,21 @@
+uuid: ee229d18-e15c-499f-96bf-29f8172a2d1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_month
+    - node.type.statement
+  module:
+    - options
+id: node.statement.field_month
+field_name: field_month
+entity_type: node
+bundle: statement
+label: Month
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

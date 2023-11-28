@@ -1,0 +1,21 @@
+uuid: c06e5dd1-0f58-4e16-9a15-2f3110c20291
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.nutrients
+  module:
+    - text
+id: taxonomy_term.nutrients.default
+targetEntityType: taxonomy_term
+bundle: nutrients
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

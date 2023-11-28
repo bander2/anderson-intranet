@@ -1,0 +1,18 @@
+_core:
+  default_config_hash: HB6SCwGUObk7Kb27WnMrKHaq4YzrcsYfCScUcby6XDk
+claro_extras: null
+tabs__active_tab: edit-basic-settings
+node_form_meta: 1
+node_breadcrumbs: 0
+enhance_paragraph_titles: 0
+node_form_meta_types:
+  statement: statement
+  article: 0
+  expense: 0
+  page: 0
+  recipe: 0
+submit: 'Save configuration'
+form_build_id: form-RteWnE9uiHKnxw4HaZYCL_sYEppynv4D4k0wq3MIXSg
+form_token: c9bkWyT-Uy7y4TKYUWinvnkoDXAXSa_8IYqorqQ9Bx0
+form_id: claro_extras_settings_form
+op: 'Save configuration'

@@ -1,0 +1,29 @@
+uuid: 84b4edf5-c6ae-4039-af67-2419ff12e383
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_category
+    - paragraphs.paragraphs_type.expense
+    - taxonomy.vocabulary.expense_categories
+id: paragraph.expense.field_category
+field_name: field_category
+entity_type: paragraph
+bundle: expense
+label: Category
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      expense_categories: expense_categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

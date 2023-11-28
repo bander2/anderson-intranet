@@ -1,0 +1,4 @@
+line_item:
+  css:
+    theme:
+      css/line-item.css: {}

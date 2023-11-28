@@ -1,0 +1,19 @@
+uuid: 1b8ff00f-8e8e-4161-9bec-79143315aa57
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_tracking_number
+    - paragraphs.paragraphs_type.expense
+id: paragraph.expense.field_tracking_number
+field_name: field_tracking_number
+entity_type: paragraph
+bundle: expense
+label: 'Tracking Number'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

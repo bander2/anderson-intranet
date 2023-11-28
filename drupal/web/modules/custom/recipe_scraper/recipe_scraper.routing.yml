@@ -1,0 +1,15 @@
+recipe_scraper.scraper:
+  path: '/admin/content/scraper'
+  defaults:
+    _title: 'Scraper'
+    _form: 'Drupal\recipe_scraper\Form\ScraperForm'
+  requirements:
+    _permission: 'create recipe content'
+
+recipe_scraper.example:
+  path: '/debug'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\recipe_scraper\Controller\RecipeScraperController'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,26 @@
+uuid: d115e7a7-7ecf-481e-9650-e1b51876e224
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.statement.field_line_items
+    - field.field.node.statement.field_month
+    - field.field.node.statement.field_year
+    - node.type.statement
+  module:
+    - user
+id: node.statement.teaser
+targetEntityType: node
+bundle: statement
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_line_items: true
+  field_month: true
+  field_year: true

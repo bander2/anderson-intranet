@@ -1,0 +1,43 @@
+---
+version: '3.5'
+services:
+  db:
+    container_name: anderson_db
+    image: mysql:5.7
+    volumes:
+      - ./.data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command: --max-allowed-packet=128M --transaction-isolation=READ-COMMITTED
+    networks:
+      - database
+  scraper:
+    container_name: anderson_scraper
+    image: bander2/recipe-scraper
+    ports:
+      - 8889:80
+    networks:
+      - scraper
+  drupal:
+    container_name: anderson_web
+    image: bander2/anderson-intranet
+    build: .
+    volumes:
+      - ./drupal:/var/www/drupal
+    ports:
+      - 8888:80
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PORT: 3306
+      DRUPAL_ENV: dev
+    networks:
+      - database
+      - scraper
+networks:
+  database:
+  scraper:

@@ -1,0 +1,23 @@
+uuid: 3d9a8656-e926-4163-8fd7-8860334c69fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_debit
+    - paragraphs.paragraphs_type.expense
+id: paragraph.expense.field_debit
+field_name: field_debit
+entity_type: paragraph
+bundle: expense
+label: Debit
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: $
+  suffix: ''
+field_type: decimal

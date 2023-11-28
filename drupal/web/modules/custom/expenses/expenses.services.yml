@@ -1,0 +1,11 @@
+services:
+  expenses.csv_importer:
+    class: Drupal\expenses\CsvExpenseImporter
+    arguments:
+      - '@csv_serialization.encoder.csv'
+      - '@entity_type.manager'
+      - '@current_user'
+  expenses.category_guesser:
+    class: Drupal\expenses\CategoryGuesser
+    arguments:
+      - '@entity_type.manager'

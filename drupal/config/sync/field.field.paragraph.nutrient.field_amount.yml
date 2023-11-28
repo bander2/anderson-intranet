@@ -1,0 +1,23 @@
+uuid: c2cc1555-3692-48c9-bd1d-0ff04e8b97af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_amount
+    - paragraphs.paragraphs_type.nutrient
+id: paragraph.nutrient.field_amount
+field_name: field_amount
+entity_type: paragraph
+bundle: nutrient
+label: Amount
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

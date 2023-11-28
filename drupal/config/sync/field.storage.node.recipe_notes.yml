@@ -1,0 +1,23 @@
+uuid: 89f6e3b0-a5a2-4f22-b599-f7d72bb901d3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+_core:
+  default_config_hash: aQWtkEf1hlgyQi7vTjAfuXfSnHTCt8x5pp0MbWCqKzU
+id: node.recipe_notes
+field_name: recipe_notes
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes:
+  format:
+    - format
+persist_with_no_fields: false
+custom_storage: false

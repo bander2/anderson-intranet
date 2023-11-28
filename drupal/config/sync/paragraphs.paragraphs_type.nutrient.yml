@@ -1,0 +1,10 @@
+uuid: d5dd7ab2-aa39-4cd3-b968-f0dc1f2b7710
+langcode: en
+status: true
+dependencies: {  }
+id: nutrient
+label: Nutrient
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

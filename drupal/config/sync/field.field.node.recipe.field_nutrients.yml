@@ -1,0 +1,31 @@
+uuid: 5c99bc4c-8ed9-4815-8966-62ffd847ce24
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_nutrients
+    - node.type.recipe
+    - paragraphs.paragraphs_type.nutrient
+  module:
+    - entity_reference_revisions
+id: node.recipe.field_nutrients
+field_name: field_nutrients
+entity_type: node
+bundle: recipe
+label: Nutrients
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      nutrient: nutrient
+    negate: 0
+    target_bundles_drag_drop:
+      nutrient:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions

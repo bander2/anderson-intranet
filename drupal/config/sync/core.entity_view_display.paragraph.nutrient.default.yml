@@ -1,0 +1,40 @@
+uuid: e0af1446-481e-45cc-a7b5-773966ef4724
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.nutrient.field_amount
+    - field.field.paragraph.nutrient.field_nutrient
+    - field.field.paragraph.nutrient.field_unit
+    - paragraphs.paragraphs_type.nutrient
+id: paragraph.nutrient.default
+targetEntityType: paragraph
+bundle: nutrient
+mode: default
+content:
+  field_amount:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_nutrient:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_unit:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden: {  }

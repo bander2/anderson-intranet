@@ -1,0 +1,23 @@
+uuid: fdc63827-19ef-4f92-be8f-d181b086e1c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_year
+    - node.type.statement
+id: node.statement.field_year
+field_name: field_year
+entity_type: node
+bundle: statement
+label: Year
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 2000
+  max: 3000
+  prefix: ''
+  suffix: ''
+field_type: integer

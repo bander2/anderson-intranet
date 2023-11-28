@@ -1,0 +1,30 @@
+uuid: 7e2a2562-4607-4efa-8507-aca3c24d3695
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.expense_categories.field_synonyms
+    - taxonomy.vocabulary.expense_categories
+  module:
+    - text
+id: taxonomy_term.expense_categories.default
+targetEntityType: taxonomy_term
+bundle: expense_categories
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_synonyms:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

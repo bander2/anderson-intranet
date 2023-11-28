@@ -1,0 +1,117 @@
+uuid: f3ae4c22-60f1-47fd-af12-5c50b26567b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.statement.field_line_items
+    - field.field.node.statement.field_month
+    - field.field.node.statement.field_year
+    - node.type.statement
+    - views.view.line_items
+    - views.view.statement_date
+  module:
+    - layout_builder
+    - layout_discovery
+    - options
+    - paragraphs_table
+    - user
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          9deb8b10-49e7-4544-8f5d-b6953d2eb80b:
+            uuid: 9deb8b10-49e7-4544-8f5d-b6953d2eb80b
+            region: content
+            configuration:
+              id: 'views_block:line_items-block_1'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping:
+                nid: layout_builder.entity
+              views_label: ''
+              items_per_page: none
+            weight: 2
+            additional: {  }
+          9a30bfcf-f3ed-4ee6-8ce4-8e91044dea3c:
+            uuid: 9a30bfcf-f3ed-4ee6-8ce4-8e91044dea3c
+            region: content
+            configuration:
+              id: 'views_block:statement_date-block_1'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping:
+                nid: layout_builder.entity
+              views_label: ''
+              items_per_page: none
+            weight: 1
+            additional: {  }
+          2ae9448a-ac52-41ef-960d-e198c0930362:
+            uuid: 2ae9448a-ac52-41ef-960d-e198c0930362
+            region: content
+            configuration:
+              id: 'extra_field_block:node:statement:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: node.statement.default
+targetEntityType: node
+bundle: statement
+mode: default
+content:
+  field_line_items:
+    type: paragraphs_table_formatter
+    label: above
+    settings:
+      view_mode: default
+      vertical: false
+      caption: ''
+      mode: ''
+      chart_type: ''
+      chart_width: 900
+      chart_height: 300
+      import: ''
+      empty_cell_value: false
+      empty: false
+      ajax: false
+      custom_class: ''
+      hide_line_operations: false
+      footer_text: BOOGERS
+      form_format_table: 0
+      sum_fields: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_month:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_year:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

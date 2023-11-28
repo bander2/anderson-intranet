@@ -1,0 +1,30 @@
+uuid: b4a38d4f-f429-45b7-a1f8-70c3deb4325e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.expense.field_amount
+    - field.field.node.expense.field_category
+    - field.field.node.expense.field_date
+    - field.field.node.expense.field_description
+    - field.field.node.expense.field_memo
+    - node.type.expense
+  module:
+    - user
+id: node.expense.teaser
+targetEntityType: node
+bundle: expense
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_amount: true
+  field_category: true
+  field_date: true
+  field_description: true
+  field_memo: true

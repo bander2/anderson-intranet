@@ -1,0 +1,21 @@
+uuid: b7e445aa-7501-44b7-9c75-5ddac6f64088
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date
+    - node.type.expense
+  module:
+    - datetime
+id: node.expense.field_date
+field_name: field_date
+entity_type: node
+bundle: expense
+label: Date
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

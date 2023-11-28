@@ -1,0 +1,18 @@
+uuid: 9a69290f-f7f8-472c-988a-4e17dab1c528
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.expense
+id: node.expense.title
+field_name: title
+entity_type: node
+bundle: expense
+label: 'Tracking Number'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

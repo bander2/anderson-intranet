@@ -1,0 +1,10 @@
+uuid: 866f64d5-7028-4476-8616-1d4f2c9b14e8
+langcode: en
+status: true
+dependencies:
+  module:
+    - ingredient
+id: ingredient.token
+label: Token
+targetEntityType: ingredient
+cache: true

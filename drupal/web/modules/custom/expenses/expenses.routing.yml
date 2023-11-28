@@ -1,0 +1,15 @@
+expenses.import_expenses:
+  path: '/admin/content/expenses/import'
+  defaults:
+    _title: 'Import Expenses'
+    _form: 'Drupal\expenses\Form\ImportExpensesForm'
+  requirements:
+    _permission: 'create expense content'
+
+expenses.example:
+  path: '/debug'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\expenses\Controller\ExpensesController'
+  requirements:
+    _permission: 'access content'

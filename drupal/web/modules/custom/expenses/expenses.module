@@ -1,0 +1,28 @@
+<?php
+
+use Drupal\node\NodeInterface;
+use Drupal\paragraphs\ParagraphInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function expenses_form_node_statement_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['#attached']['library'][] = 'expenses/line_item';
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function expenses_paragraph_presave(ParagraphInterface $paragraph) {
+  if ($paragraph->bundle() == 'expense' && !$paragraph->field_category->target_id) {
+    $text = implode(' ', [
+      $paragraph->field_tracking_number->value,
+      $paragraph->field_description->value,
+      $paragraph->field_memo->value,
+    ]);
+
+    if ($category = \Drupal::service('expenses.category_guesser')->guess($text)) {
+      $paragraph->field_category = $category;
+    }
+  }
+}

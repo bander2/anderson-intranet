@@ -1,0 +1,21 @@
+uuid: 00850eef-4d59-4dc7-bf13-d5289ba5b3b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_date
+    - paragraphs.paragraphs_type.expense
+  module:
+    - datetime
+id: paragraph.expense.field_date
+field_name: field_date
+entity_type: paragraph
+bundle: expense
+label: Date
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
