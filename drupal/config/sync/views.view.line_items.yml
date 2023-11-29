@@ -12,10 +12,12 @@ dependencies:
     - field.storage.paragraph.field_tracking_number
     - node.type.statement
     - paragraphs.paragraphs_type.expense
+    - taxonomy.vocabulary.expense_categories
   module:
     - datetime
     - node
     - paragraphs
+    - taxonomy
 id: line_items
 label: 'Line Items'
 module: views
@@ -541,9 +543,26 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: none
+        type: full
         options:
           offset: 0
+          items_per_page: 50
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
       exposed_form:
         type: basic
         options:
@@ -638,6 +657,102 @@ display:
           plugin_id: bundle
           value:
             expense: expense
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: Search
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            field_tracking_number: field_tracking_number
+            field_description: field_description
+            field_memo: field_memo
+            field_date: field_date
+            field_category: field_category
+        field_category_target_id:
+          id: field_category_target_id
+          table: paragraph__field_category
+          field: field_category_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_category_target_id_op
+            label: Category
+            description: ''
+            use_operator: false
+            operator: field_category_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_category_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: expense_categories
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
       style:
         type: table
         options:
@@ -739,7 +854,7 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: 'Showing @total line items.'
+          content: 'Showing @start - @end of @total line items.'
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -748,6 +863,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
       tags:
         - 'config:field.storage.paragraph.field_category'
         - 'config:field.storage.paragraph.field_date'
@@ -770,6 +886,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
       tags:
         - 'config:field.storage.paragraph.field_category'
         - 'config:field.storage.paragraph.field_date'

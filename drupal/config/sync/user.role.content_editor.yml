@@ -4,7 +4,10 @@ status: true
 dependencies:
   config:
     - node.type.article
+    - node.type.expense
     - node.type.page
+    - node.type.recipe
+    - node.type.statement
     - taxonomy.vocabulary.tags
   module:
     - comment
@@ -32,18 +35,42 @@ permissions:
   - 'administer url aliases'
   - 'create article content'
   - 'create page content'
+  - 'create recipe content'
+  - 'create statement content'
   - 'create terms in tags'
   - 'create url aliases'
+  - 'delete any article content'
+  - 'delete any page content'
+  - 'delete any recipe content'
+  - 'delete any statement content'
   - 'delete article revisions'
   - 'delete own article content'
   - 'delete own files'
   - 'delete own page content'
+  - 'delete own recipe content'
+  - 'delete own statement content'
   - 'delete page revisions'
+  - 'delete recipe revisions'
+  - 'delete statement revisions'
+  - 'edit any recipe content'
+  - 'edit any statement content'
   - 'edit own article content'
   - 'edit own comments'
   - 'edit own page content'
+  - 'edit own recipe content'
+  - 'edit own statement content'
   - 'edit terms in tags'
   - 'revert all revisions'
+  - 'revert article revisions'
+  - 'revert expense revisions'
+  - 'revert page revisions'
+  - 'revert recipe revisions'
+  - 'revert statement revisions'
   - 'view all revisions'
+  - 'view article revisions'
+  - 'view expense revisions'
   - 'view own unpublished content'
+  - 'view page revisions'
+  - 'view recipe revisions'
+  - 'view statement revisions'
   - 'view the administration theme'

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.statement.field_line_items
     - field.field.node.statement.field_month
+    - field.field.node.statement.field_numeric_month
     - field.field.node.statement.field_year
     - node.type.statement
   module:
@@ -105,4 +106,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_numeric_month: true

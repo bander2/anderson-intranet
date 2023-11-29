@@ -43,3 +43,4 @@ sites/simpletest
 
 modules/contrib/*
 themes/contrib/*
+libraries/*

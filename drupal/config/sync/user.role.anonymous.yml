@@ -9,8 +9,9 @@ dependencies:
     - contact
     - filter
     - media
+    - node_view_permissions
+    - paragraphs_type_permissions
     - search
-    - system
 _core:
   default_config_hash: 6WavjUYXIegP9AAg2zXGx54MWIVoomC3SZhNiqe-Dyk
 id: anonymous
@@ -19,8 +20,16 @@ weight: 0
 is_admin: false
 permissions:
   - 'access comments'
-  - 'access content'
   - 'access site-wide contact form'
   - 'search content'
   - 'use text format restricted_html'
+  - 'view any article content'
+  - 'view any page content'
+  - 'view any recipe content'
   - 'view media'
+  - 'view own article content'
+  - 'view own page content'
+  - 'view own recipe content'
+  - 'view own statement content'
+  - 'view paragraph content expense'
+  - 'view paragraph content nutrient'

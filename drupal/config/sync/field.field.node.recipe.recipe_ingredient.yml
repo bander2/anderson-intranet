@@ -20,9 +20,9 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  default_unit: ''
   handler: 'default:ingredient'
   handler_settings: {  }
+  default_unit: ''
   unit_sets:
     - common
     - si

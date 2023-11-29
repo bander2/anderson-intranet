@@ -3,14 +3,15 @@ version: '3.5'
 services:
   db:
     container_name: anderson_db
-    image: mysql:5.7
+    image: mariadb
     volumes:
       - ./.data:/var/lib/mysql
+      - ./brendan.sql:/docker-entrypoint-initdb.d/brendan.sql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MYSQL_DATABASE}
+      MARIADB_USER: ${MYSQL_USER}
+      MARIADB_PASSWORD: ${MYSQL_PASSWORD}
     command: --max-allowed-packet=128M --transaction-isolation=READ-COMMITTED
     networks:
       - database

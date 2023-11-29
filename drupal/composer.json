@@ -12,24 +12,45 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "google/charts",
+                "version": "45",
+                "type": "drupal-library",
+                "extra": {
+                    "installer-name": "google_charts"
+                },
+                "dist": {
+                    "url": "https://www.gstatic.com/charts/loader.js",
+                    "type": "file"
+                },
+                "require": {
+                    "composer/installers": "^1.0 || ^2.0"
+                }
+            }
         }
     ],
     "require": {
         "composer/installers": "^2.0",
         "crwlr/schema-org": "^0.3.0",
         "drupal/auto_entitylabel": "^3.0",
+        "drupal/charts": "^5.0",
         "drupal/claro_extras": "^2.0",
         "drupal/core-composer-scaffold": "^10.1",
         "drupal/core-project-message": "^10.1",
         "drupal/core-recommended": "^10.1",
         "drupal/csv_serialization": "^4.0",
         "drupal/devel": "^5.1",
+        "drupal/node_view_permissions": "^1.6",
         "drupal/paragraphs": "^1.16",
         "drupal/paragraphs_table": "^1.21",
         "drupal/recipe": "^2.1",
         "drupal/token": "^1.13",
         "drupal/views_entity_form_field": "^1.0@beta",
-        "drush/drush": "^12.4"
+        "drush/drush": "^12.4",
+        "google/charts": "45"
     },
     "conflict": {
         "drupal/drupal": "*"

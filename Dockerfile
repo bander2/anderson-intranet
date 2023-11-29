@@ -14,8 +14,7 @@ RUN install-php-extensions \
     opcache \
     imap \
     uploadprogress \
-    @composer \
-    && cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+    @composer
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -30,6 +29,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN mkdir -p /var/www/drupal/files /var/www/drupal/web/sites/default/files
 
+COPY php.ini /usr/local/etc/php/php.ini
 COPY 000-default.conf /etc/apache2/sites-enabled/
 
 COPY drupal/composer.json                   /var/www/drupal/composer.json

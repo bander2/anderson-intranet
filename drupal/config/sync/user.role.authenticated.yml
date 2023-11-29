@@ -10,6 +10,7 @@ dependencies:
     - file
     - filter
     - media
+    - paragraphs_type_permissions
     - search
     - shortcut
     - system
@@ -24,9 +25,17 @@ permissions:
   - 'access content'
   - 'access shortcuts'
   - 'access site-wide contact form'
+  - 'create paragraph content expense'
+  - 'create paragraph content nutrient'
   - 'delete own files'
+  - 'delete paragraph content expense'
+  - 'delete paragraph content nutrient'
   - 'post comments'
   - 'search content'
   - 'skip comment approval'
+  - 'update paragraph content expense'
+  - 'update paragraph content nutrient'
   - 'use text format basic_html'
   - 'view media'
+  - 'view paragraph content expense'
+  - 'view paragraph content nutrient'

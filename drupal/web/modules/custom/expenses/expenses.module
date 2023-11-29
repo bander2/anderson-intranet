@@ -14,15 +14,29 @@ function expenses_form_node_statement_edit_form_alter(&$form, \Drupal\Core\Form\
  * Implements hook_ENTITY_TYPE_presave().
  */
 function expenses_paragraph_presave(ParagraphInterface $paragraph) {
-  if ($paragraph->bundle() == 'expense' && !$paragraph->field_category->target_id) {
-    $text = implode(' ', [
-      $paragraph->field_tracking_number->value,
-      $paragraph->field_description->value,
-      $paragraph->field_memo->value,
-    ]);
+  if ($paragraph->bundle() == 'expense') {
+    $paragraph->field_negative_debit = $paragraph->field_debit->value * -1;
 
-    if ($category = \Drupal::service('expenses.category_guesser')->guess($text)) {
-      $paragraph->field_category = $category;
+    if (!$paragraph->field_category->target_id) {
+      $text = implode(' ', [
+        $paragraph->field_tracking_number->value,
+        $paragraph->field_description->value,
+        $paragraph->field_memo->value,
+      ]);
+
+      if ($category = \Drupal::service('expenses.category_guesser')
+        ->guess($text)) {
+        $paragraph->field_category = $category;
+      }
     }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function expenses_node_presave(NodeInterface $node) {
+  if ($node->bundle() == 'statement') {
+    $node->field_numeric_month = $node->field_month->value;
   }
 }

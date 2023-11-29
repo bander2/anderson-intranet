@@ -1,0 +1,23 @@
+uuid: bf118b3c-0764-41d9-be7d-1d7e62e77ed7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_negative_debit
+    - paragraphs.paragraphs_type.expense
+id: paragraph.expense.field_negative_debit
+field_name: field_negative_debit
+entity_type: paragraph
+bundle: expense
+label: 'Negative Debit'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: $
+  suffix: ''
+field_type: decimal

@@ -5,15 +5,17 @@ dependencies:
   config:
     - field.field.node.statement.field_line_items
     - field.field.node.statement.field_month
+    - field.field.node.statement.field_numeric_month
     - field.field.node.statement.field_year
     - node.type.statement
+    - views.view.line_item_view
     - views.view.line_items
     - views.view.statement_date
   module:
+    - entity_reference_revisions
     - layout_builder
     - layout_discovery
     - options
-    - paragraphs_table
     - user
     - views
 third_party_settings:
@@ -38,7 +40,7 @@ third_party_settings:
                 nid: layout_builder.entity
               views_label: ''
               items_per_page: none
-            weight: 2
+            weight: 3
             additional: {  }
           9a30bfcf-f3ed-4ee6-8ce4-8e91044dea3c:
             uuid: 9a30bfcf-f3ed-4ee6-8ce4-8e91044dea3c
@@ -64,6 +66,20 @@ third_party_settings:
                 entity: layout_builder.entity
             weight: 0
             additional: {  }
+          7b6c5a1a-70c2-44b4-a7a0-d02112735139:
+            uuid: 7b6c5a1a-70c2-44b4-a7a0-d02112735139
+            region: content
+            configuration:
+              id: 'views_block:line_item_view-block_2'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping:
+                nid: layout_builder.entity
+              views_label: ''
+              items_per_page: none
+            weight: 2
+            additional: {  }
         third_party_settings: {  }
 id: node.statement.default
 targetEntityType: node
@@ -71,27 +87,13 @@ bundle: statement
 mode: default
 content:
   field_line_items:
-    type: paragraphs_table_formatter
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
-      vertical: false
-      caption: ''
-      mode: ''
-      chart_type: ''
-      chart_width: 900
-      chart_height: 300
-      import: ''
-      empty_cell_value: false
-      empty: false
-      ajax: false
-      custom_class: ''
-      hide_line_operations: false
-      footer_text: BOOGERS
-      form_format_table: 0
-      sum_fields: {  }
+      link: ''
     third_party_settings: {  }
-    weight: 102
+    weight: 105
     region: content
   field_month:
     type: list_default
@@ -99,6 +101,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 103
+    region: content
+  field_numeric_month:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 106
     region: content
   field_year:
     type: number_integer

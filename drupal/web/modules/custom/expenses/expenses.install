@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Implements hook_update_N().
+ */
+function expenses_update_91001(&$sandbox) {
+  $statements = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadByProperties(['type' => 'statement']);
+
+  foreach ($statements as $statement) {
+    $statement->save();
+  }
+
+  $line_items = \Drupal::entityTypeManager()
+    ->getStorage('paragraph')
+    ->loadByProperties(['type' => 'expense']);
+
+  foreach ($line_items as $line_item) {
+    $line_item->save();
+  }
+}

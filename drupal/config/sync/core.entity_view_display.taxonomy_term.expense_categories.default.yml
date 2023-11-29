@@ -5,8 +5,52 @@ dependencies:
   config:
     - field.field.taxonomy_term.expense_categories.field_synonyms
     - taxonomy.vocabulary.expense_categories
+    - views.view.statement
   module:
+    - layout_builder
+    - layout_discovery
     - text
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          3050833d-22f8-428a-a8ba-2627374a818d:
+            uuid: 3050833d-22f8-428a-a8ba-2627374a818d
+            region: content
+            configuration:
+              id: 'field_block:taxonomy_term:expense_categories:description'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          6ff84e50-972d-45cd-b782-fc53837084d0:
+            uuid: 6ff84e50-972d-45cd-b782-fc53837084d0
+            region: content
+            configuration:
+              id: 'views_block:statement-block_1'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping:
+                field_category_target_id: layout_builder.entity
+              views_label: ''
+              items_per_page: '12'
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
 id: taxonomy_term.expense_categories.default
 targetEntityType: taxonomy_term
 bundle: expense_categories
