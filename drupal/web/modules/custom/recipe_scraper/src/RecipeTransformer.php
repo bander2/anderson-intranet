@@ -2,6 +2,7 @@
 
 namespace Drupal\recipe_scraper;
 
+use DateInterval;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\File\FileSystemInterface;
@@ -11,6 +12,11 @@ use Drupal\file\FileRepositoryInterface;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
+use GuzzleHttp\Client;
+use Spatie\SchemaOrg\Contracts\ThingContract;
+use Spatie\SchemaOrg\HowToStep;
+use Spatie\SchemaOrg\NutritionInformation;
+use Spatie\SchemaOrg\Recipe;
 
 class RecipeTransformer implements TransformerInterface {
 
@@ -18,45 +24,61 @@ class RecipeTransformer implements TransformerInterface {
   private EntityTypeManagerInterface $entityTypeManager;
   private FileRepositoryInterface $fileRepository;
   private AccountInterface $account;
+  private Client $client;
 
-  public function __construct(IngredientNormalizer $ingredientNormalizer, EntityTypeManagerInterface $entityTypeManager, FileRepositoryInterface $fileRepository, AccountInterface $account) {
+  public function __construct(
+    IngredientNormalizer $ingredientNormalizer,
+    EntityTypeManagerInterface $entityTypeManager,
+    FileRepositoryInterface $fileRepository,
+    AccountInterface $account,
+    Client $client
+  ) {
     $this->ingredientNormalizer = $ingredientNormalizer;
     $this->entityTypeManager = $entityTypeManager;
     $this->fileRepository = $fileRepository;
     $this->account = $account;
+    $this->client = $client;
   }
 
   /**
    * @param array $data
    * @return EntityInterface
    */
-  public function transform(array $data): EntityInterface {
-    [$yield_amount, $yield_unit] = $this->splitYield($data['yields']);
+  public function transform(ThingContract $data): EntityInterface {
+    if (!$data instanceof Recipe) {
+      throw new \InvalidArgumentException();
+    }
+
+    [$yield_amount, $yield_unit] = $this->splitYield($data['recipeYield']);
 
     $node = Node::create([
       'type' => 'recipe',
-      'title' => $data['title'],
+      'title' => $data->getProperty('name'),
       'recipe_description' => [
-        'value' => $data['description'],
+        'value' => $data->getProperty('description'),
         'format' => 'basic_html',
       ],
-      'recipe_ingredient' => array_map([$this, 'createIngredient'], $data['ingredients']),
+      'recipe_ingredient' => array_map([$this, 'createIngredient'], $data->getProperty('recipeIngredient')),
       'recipe_instructions' => [
-        'value' => Markup::create('<ol>' . array_reduce($data['instructions_list'], function ($cary, $item) {
-          $cary .= "<li>{$item}</li>";
+        'value' => Markup::create('<ol>' . array_reduce($data->getProperty('recipeInstructions'), function ($cary, HowToStep $item) {
+          $cary .= "<li>{$item->getProperty('text')}</li>";
           return $cary;
         }, '') . '</ol>'),
         'format' => 'basic_html',
       ],
-      'recipe_cook_time' => $data['cook_time'],
-      'recipe_prep_time' => $data['prep_time'],
+      'recipe_cook_time' => (new DateInterval($data->getProperty('cookTime')))->format('%i minutes'),
+      'recipe_prep_time' => (new DateInterval($data->getProperty('prepTime')))->format('%i minutes'),
       'recipe_yield_amount' => $yield_amount,
       'recipe_yield_units' => $yield_unit,
     ]);
 
-    if ($data['image']) {
-      $image_data = file_get_contents($data['image']);
-      $image = $this->fileRepository->writeData($image_data, 'public://' . basename($data['image']), FileSystemInterface::EXISTS_RENAME);
+    if ($data->getProperty('image')) {
+      $img_uri = $data->getProperty('image')[0];
+      $response = $this->client->get($img_uri);
+      $image_data = $response->getBody()->getContents();
+
+      //$image_data = file_get_contents($img_uri);
+      $image = $this->fileRepository->writeData($image_data, 'public://' . basename($img_uri), FileSystemInterface::EXISTS_RENAME);
       $image_media = $this->entityTypeManager
         ->getStorage('media')
         ->create([
@@ -65,16 +87,22 @@ class RecipeTransformer implements TransformerInterface {
           'uid' => $this->account->id(),
           'field_media_image' => [
             'target_id' => $image->id(),
-            'alt' => $data['title'],
-            'title' => $data['title'],
+            'alt' => $data->getProperty('name'),
+            'title' => $data->getProperty('name'),
           ],
         ]);
       $image_media->save();
       $node->field_picture = $image_media;
     }
 
-    if (!empty($data['nutrients'])) {
-      foreach ($data['nutrients'] as $name => $value) {
+    /** @var NutritionInformation $nutrition */
+    $nutrition = $data->getProperty('nutrition');
+    if ($nutrition instanceof NutritionInformation) {
+      foreach ($nutrition->toArray() as $name => $value) {
+        if (str_starts_with($name, '@')) {
+          continue;
+        }
+
         $nutrients = $this->entityTypeManager
           ->getStorage('taxonomy_term')
           ->loadByProperties(['vid' => 'nutrients', 'name' => $name]);
@@ -91,12 +119,12 @@ class RecipeTransformer implements TransformerInterface {
         $unitName = implode(' ', $values);
         $units = $this->entityTypeManager
           ->getStorage('taxonomy_term')
-          ->loadByProperties(['vid' => 'units', 'name' => $unitName]);
+          ->loadByProperties(['vid' => 'unit', 'name' => $unitName]);
 
         if (!empty($units)) {
           $unit = reset($units);
         } else {
-          $unit = Term::create(['vid' => 'units', 'name' => $unitName]);
+          $unit = Term::create(['vid' => 'unit', 'name' => $unitName]);
           $unit->save();
         }
 
@@ -121,7 +149,15 @@ class RecipeTransformer implements TransformerInterface {
    * @param string $yield
    * @return array
    */
-  private function splitYield(string $yield): array {
+  private function splitYield(array|string $yield): array {
+    if (is_array($yield) && count($yield) == 1) {
+      return [$yield[0], 'servings'];
+    }
+
+    if (is_array($yield)) {
+      $yield = array_shift($yield);
+    }
+
     $chars = str_split($yield);
     $index = 0;
     foreach ($chars as $char) {

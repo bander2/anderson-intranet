@@ -1,19 +1,20 @@
-uuid: b0a56d61-ad54-4dc8-9720-39788a7733e1
+uuid: 7fba4bed-1877-4756-9dde-a4cb3c815616
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.statement
+    - paragraphs.paragraphs_type.expense
+    - taxonomy.vocabulary.expense_categories
   module:
     - node
-    - user
-id: statements
-label: Statements
+    - paragraphs
+id: category_table
+label: 'Category Table'
 module: views
 description: ''
 tag: ''
-base_table: node_field_data
-base_field: nid
+base_table: paragraphs_item_field_data
+base_field: id
 display:
   default:
     id: default
@@ -21,20 +22,20 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Statements
+      title: 'Category Table'
       fields:
-        nid:
-          id: nid
+        title:
+          id: title
           table: node_field_data
-          field: nid
-          relationship: none
+          field: title
+          relationship: reverse__node__field_line_items
           group_type: group
           admin_label: ''
           entity_type: node
-          entity_field: nid
+          entity_field: title
           plugin_id: field
-          label: ID
-          exclude: true
+          label: Title
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -75,54 +76,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
-          label: Title
-          exclude: false
-          alter:
-            alter_text: false
-            make_link: false
-            absolute: false
-            word_boundary: false
-            ellipsis: false
-            strip_tags: false
-            trim: false
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
           type: string
           settings:
             link_to_entity: true
@@ -136,19 +89,19 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        nothing:
-          id: nothing
-          table: views
-          field: nothing
+        field_negative_debit:
+          id: field_negative_debit
+          table: paragraph__field_negative_debit
+          field: field_negative_debit
           relationship: none
-          group_type: group
+          group_type: sum
           admin_label: ''
-          plugin_id: custom
-          label: Links
+          plugin_id: field
+          label: 'Negative Debit'
           exclude: false
           alter:
-            alter_text: true
-            text: '<a href="/node/{{ nid }}/categories">Categories</a> | <a href="/node/{{ nid }}/categorize">Categorize</a>'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -184,17 +137,36 @@ display:
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
       pager:
-        type: mini
+        type: full
         options:
           offset: 0
-          items_per_page: 25
+          items_per_page: 12
           total_pages: null
           id: 0
           tags:
-            next: ››
-            previous: ‹‹
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -203,6 +175,7 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
+          quantity: 9
       exposed_form:
         type: basic
         options:
@@ -214,37 +187,90 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
-        options:
-          perm: 'access content'
+        type: none
+        options: {  }
       cache:
         type: tag
         options: {  }
       empty: {  }
       sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
+        field_year_value:
+          id: field_year_value
+          table: node__field_year
+          field: field_year_value
+          relationship: reverse__node__field_line_items
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
+          plugin_id: standard
           order: DESC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
-          granularity: second
-      arguments: {  }
+        field_numeric_month_value:
+          id: field_numeric_month_value
+          table: node__field_numeric_month
+          field: field_numeric_month_value
+          relationship: reverse__node__field_line_items
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+      arguments:
+        field_category_target_id:
+          id: field_category_target_id
+          table: paragraph__field_category
+          field: field_category_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: taxonomy_tid
+          default_argument_options:
+            term_page: '1'
+            node: false
+            limit: false
+            vids: {  }
+            anyall: ','
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            override: false
+            items_per_page: 25
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: 'entity:taxonomy_term'
+            fail: 'not found'
+          validate_options:
+            bundles:
+              expense_categories: expense_categories
+            access: false
+            operation: view
+            multiple: 0
+          break_phrase: false
+          not: false
       filters:
         status:
           id: status
-          table: node_field_data
+          table: paragraphs_item_field_data
           field: status
-          entity_type: node
+          entity_type: paragraph
           entity_field: status
           plugin_id: boolean
           value: '1'
@@ -253,13 +279,13 @@ display:
             operator: ''
         type:
           id: type
-          table: node_field_data
+          table: paragraphs_item_field_data
           field: type
-          entity_type: node
+          entity_type: paragraph
           entity_field: type
           plugin_id: bundle
           value:
-            statement: statement
+            expense: expense
       style:
         type: table
       row:
@@ -272,7 +298,18 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        reverse__node__field_line_items:
+          id: reverse__node__field_line_items
+          table: paragraphs_item_field_data
+          field: reverse__node__field_line_items
+          relationship: none
+          group_type: group
+          admin_label: field_line_items
+          entity_type: paragraph
+          plugin_id: entity_reverse
+          required: true
+      group_by: true
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -281,33 +318,21 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
-        - 'user.node_grants:view'
-        - user.permissions
       tags: {  }
-  page_1:
-    id: page_1
-    display_title: Page
-    display_plugin: page
+  block_1:
+    id: block_1
+    display_title: Block
+    display_plugin: block
     position: 1
     display_options:
       display_extenders: {  }
-      path: statements
-      menu:
-        type: none
-        title: Statements
-        description: ''
-        weight: 0
-        expanded: false
-        menu_name: main
-        parent: ''
-        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
-        - 'user.node_grants:view'
-        - user.permissions
       tags: {  }

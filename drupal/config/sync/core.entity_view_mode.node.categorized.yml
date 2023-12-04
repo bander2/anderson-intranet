@@ -1,0 +1,10 @@
+uuid: 5c08ad3d-7a99-4455-a83e-2be0ef69e535
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.categorized
+label: Categorized
+targetEntityType: node
+cache: true

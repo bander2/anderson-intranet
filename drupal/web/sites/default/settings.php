@@ -877,4 +877,4 @@ $databases['default']['default'] = array (
 );
 $settings['config_sync_directory'] = '/var/www/drupal/config/sync';
 $settings['file_private_path'] = '/var/www/drupal/files';
-
+#$settings['file_assets_path'] = 'sites/default/assets';

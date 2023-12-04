@@ -7,7 +7,6 @@ services:
     class: Drupal\recipe_scraper\RecipeScraper
     arguments:
       - '@http_client'
-      - '@recipe_scraper.ingredient_normalizer'
   recipe_scraper.recipe_transformer:
     class: Drupal\recipe_scraper\RecipeTransformer
     arguments:
@@ -15,3 +14,4 @@ services:
       - '@entity_type.manager'
       - '@file.repository'
       - '@current_user'
+      - '@http_client'

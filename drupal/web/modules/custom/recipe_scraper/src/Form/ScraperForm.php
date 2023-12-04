@@ -89,10 +89,16 @@ final class ScraperForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     //dpm($form_state->getValues());
-    $date = $this->scraper->scrape($form_state->getValue('url'));
-    $recipe = $this->recipeTransformer->transform($date);
 
-    dpm($recipe);
+    /** @var \Spatie\SchemaOrg\Recipe $data */
+    $data = $this->scraper->scrape($form_state->getValue('url'));
+
+
+
+    $recipe = $this->recipeTransformer->transform($data);
+
+
+    //dpm($recipe);
 
 
     //$this->messenger()->addStatus($this->t('The message has been sent.'));

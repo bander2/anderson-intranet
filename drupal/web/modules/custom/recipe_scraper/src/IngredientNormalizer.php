@@ -40,7 +40,7 @@ class IngredientNormalizer {
    * @param $ingredient
    * @return array
    */
-  public function normalize($ingredient): Ingredient {
+  public function normalize(string $ingredient): Ingredient {
     $ingredient = strtolower($ingredient);
     $ingredient = str_replace(array_keys($this->fractions), array_values($this->fractions), $ingredient);
     $units = $this->ingredientUnitUtility->getConfiguredUnits();

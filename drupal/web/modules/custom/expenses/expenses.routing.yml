@@ -13,3 +13,11 @@ expenses.example:
     _controller: '\Drupal\expenses\Controller\ExpensesController'
   requirements:
     _permission: 'access content'
+
+expenses.overview:
+  path: '/overview'
+  defaults:
+    _title: 'Overview'
+    _controller: '\Drupal\expenses\Controller\ExpensesController::overview'
+  requirements:
+    _permission: 'view any statement content'

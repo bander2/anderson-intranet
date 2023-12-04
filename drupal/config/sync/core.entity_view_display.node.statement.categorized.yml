@@ -1,0 +1,89 @@
+uuid: 3d1872d5-2f18-4ae6-b6c6-53c46e6e87ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.categorized
+    - field.field.node.statement.field_line_items
+    - field.field.node.statement.field_month
+    - field.field.node.statement.field_numeric_month
+    - field.field.node.statement.field_year
+    - node.type.statement
+    - views.view.expenses_per_statement_by_category
+  module:
+    - entity_reference_revisions
+    - layout_builder
+    - layout_discovery
+    - options
+    - user
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          050923cb-47b9-40be-bebc-dbde97633bdb:
+            uuid: 050923cb-47b9-40be-bebc-dbde97633bdb
+            region: content
+            configuration:
+              id: 'views_block:expenses_per_statement_by_category-block_1'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping:
+                nid: layout_builder.entity
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: node.statement.categorized
+targetEntityType: node
+bundle: statement
+mode: categorized
+content:
+  field_line_items:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_month:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_numeric_month:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_year:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

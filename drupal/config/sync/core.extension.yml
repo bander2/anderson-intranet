@@ -59,10 +59,12 @@ module:
   token: 0
   toolbar: 0
   tour: 0
+  tracer: 0
   update: 0
   user: 0
   views_entity_form_field: 0
   views_ui: 0
+  webprofiler: 0
   views: 10
   paragraphs: 11
   minimal: 1000

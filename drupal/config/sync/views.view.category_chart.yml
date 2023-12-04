@@ -1,4 +1,4 @@
-uuid: 0ade836d-1986-4963-9be4-32d151ce6f31
+uuid: 9d379634-f347-492b-8d12-118385100582
 langcode: en
 status: true
 dependencies:
@@ -11,8 +11,8 @@ dependencies:
     - node
     - paragraphs
     - taxonomy
-id: statement
-label: Statement
+id: category_chart
+label: 'Category Chart'
 module: views
 description: ''
 tag: ''
@@ -25,6 +25,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
+      title: 'Category Chart'
       fields:
         title:
           id: title
@@ -40,7 +41,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{{ title__value|replace({'Statement: ': ''}) }} "
+            text: '{{ title__value|replace({"Statement: ": ""}) }}'
             make_link: false
             path: ''
             absolute: false
@@ -142,7 +143,11 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: number_decimal
-          settings: {  }
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -158,26 +163,13 @@ display:
           decimal: .
           format_plural: 0
           format_plural_string: !!binary MQNAY291bnQ=
-          prefix: $
+          prefix: ''
           suffix: ''
       pager:
-        type: mini
+        type: some
         options:
           offset: 0
-          items_per_page: 50
-          total_pages: null
-          id: 0
-          tags:
-            next: ››
-            previous: ‹‹
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
+          items_per_page: 12
       exposed_form:
         type: basic
         options:
@@ -223,13 +215,15 @@ display:
             field_identifier: ''
           exposed: false
       arguments:
-        field_category_target_id:
-          id: field_category_target_id
-          table: paragraph__field_category
-          field: field_category_target_id
-          relationship: none
+        tid:
+          id: tid
+          table: taxonomy_term_field_revision
+          field: tid
+          relationship: field_category
           group_type: group
           admin_label: ''
+          entity_type: taxonomy_term
+          entity_field: tid
           plugin_id: numeric
           default_action: default
           exception:
@@ -346,11 +340,6 @@ display:
               labels_rotation: '0'
       row:
         type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
       query:
         type: views_query
         options:
@@ -360,6 +349,15 @@ display:
           replica: false
           query_tags: {  }
       relationships:
+        field_category:
+          id: field_category
+          table: paragraph__field_category
+          field: field_category
+          relationship: none
+          group_type: group
+          admin_label: 'field_category: Taxonomy term'
+          plugin_id: standard
+          required: true
         reverse__node__field_line_items:
           id: reverse__node__field_line_items
           table: paragraphs_item_field_data
@@ -370,117 +368,8 @@ display:
           entity_type: paragraph
           plugin_id: entity_reverse
           required: true
-        field_category:
-          id: field_category
-          table: paragraph__field_category
-          field: field_category
-          relationship: none
-          group_type: group
-          admin_label: 'field_category: Taxonomy term'
-          plugin_id: standard
-          required: true
       group_by: true
       header: {  }
-      footer:
-        view:
-          id: view
-          table: views
-          field: view
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: view
-          empty: false
-          view_to_insert: 'statement:block_2'
-          inherit_arguments: true
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-      tags: {  }
-  block_1:
-    id: block_1
-    display_title: Chart
-    display_plugin: block
-    position: 1
-    display_options:
-      defaults:
-        footer: false
-      display_description: ''
-      footer:
-        view:
-          id: view
-          table: views
-          field: view
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: view
-          empty: false
-          view_to_insert: 'statement:block_2'
-          inherit_arguments: true
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-      tags: {  }
-  block_2:
-    id: block_2
-    display_title: Table
-    display_plugin: block
-    position: 2
-    display_options:
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          columns:
-            title: title
-            field_negative_debit: field_negative_debit
-          default: '-1'
-          info:
-            title:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_negative_debit:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          override: true
-          sticky: false
-          summary: ''
-          empty_table: false
-          caption: ''
-          description: ''
-      row:
-        type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
-      defaults:
-        style: false
-        row: false
-        footer: false
-      display_description: ''
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -489,5 +378,18 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - url.query_args
+      tags: {  }
+  block_1:
+    id: block_1
+    display_title: Block
+    display_plugin: block
+    position: 1
+    display_options:
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
       tags: {  }
