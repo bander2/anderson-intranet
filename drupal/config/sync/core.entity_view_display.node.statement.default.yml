@@ -42,7 +42,7 @@ third_party_settings:
                 nid: layout_builder.entity
               views_label: ''
               items_per_page: none
-            weight: 5
+            weight: 6
             additional: {  }
           9a30bfcf-f3ed-4ee6-8ce4-8e91044dea3c:
             uuid: 9a30bfcf-f3ed-4ee6-8ce4-8e91044dea3c
@@ -56,7 +56,7 @@ third_party_settings:
                 nid: layout_builder.entity
               views_label: ''
               items_per_page: none
-            weight: 1
+            weight: 2
             additional: {  }
           2ae9448a-ac52-41ef-960d-e198c0930362:
             uuid: 2ae9448a-ac52-41ef-960d-e198c0930362
@@ -66,7 +66,7 @@ third_party_settings:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-            weight: 0
+            weight: 1
             additional: {  }
           7b6c5a1a-70c2-44b4-a7a0-d02112735139:
             uuid: 7b6c5a1a-70c2-44b4-a7a0-d02112735139
@@ -80,7 +80,7 @@ third_party_settings:
                 nid: layout_builder.entity
               views_label: ''
               items_per_page: none
-            weight: 2
+            weight: 3
             additional: {  }
           e3a0f2a1-7699-4b10-b5e6-4e2e3139a0f2:
             uuid: e3a0f2a1-7699-4b10-b5e6-4e2e3139a0f2
@@ -94,7 +94,7 @@ third_party_settings:
                 nid: layout_builder.entity
               views_label: summary
               items_per_page: '1'
-            weight: 3
+            weight: 4
             additional: {  }
           f471eb4f-5fd7-43ed-9463-7f24665c047b:
             uuid: f471eb4f-5fd7-43ed-9463-7f24665c047b
@@ -108,7 +108,7 @@ third_party_settings:
                 nid: layout_builder.entity
               views_label: ''
               items_per_page: '1'
-            weight: 4
+            weight: 5
             additional: {  }
         third_party_settings: {  }
 id: node.statement.default
