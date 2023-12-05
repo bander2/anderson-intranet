@@ -15,13 +15,6 @@ services:
     command: --max-allowed-packet=128M --transaction-isolation=READ-COMMITTED
     networks:
       - database
-  scraper:
-    container_name: anderson_scraper
-    image: bander2/recipe-scraper
-    ports:
-      - 8889:80
-    networks:
-      - scraper
   drupal:
     container_name: anderson_web
     image: bander2/anderson-intranet
@@ -38,7 +31,5 @@ services:
       DRUPAL_ENV: dev
     networks:
       - database
-      - scraper
 networks:
   database:
-  scraper:

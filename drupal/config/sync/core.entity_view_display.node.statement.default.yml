@@ -11,6 +11,8 @@ dependencies:
     - views.view.line_item_view
     - views.view.line_items
     - views.view.statement_date
+    - views.view.statement_expenses
+    - views.view.statement_income
   module:
     - entity_reference_revisions
     - layout_builder
@@ -40,7 +42,7 @@ third_party_settings:
                 nid: layout_builder.entity
               views_label: ''
               items_per_page: none
-            weight: 3
+            weight: 5
             additional: {  }
           9a30bfcf-f3ed-4ee6-8ce4-8e91044dea3c:
             uuid: 9a30bfcf-f3ed-4ee6-8ce4-8e91044dea3c
@@ -79,6 +81,34 @@ third_party_settings:
               views_label: ''
               items_per_page: none
             weight: 2
+            additional: {  }
+          e3a0f2a1-7699-4b10-b5e6-4e2e3139a0f2:
+            uuid: e3a0f2a1-7699-4b10-b5e6-4e2e3139a0f2
+            region: content
+            configuration:
+              id: 'views_block:statement_income-block_1'
+              label: summary
+              label_display: visible
+              provider: views
+              context_mapping:
+                nid: layout_builder.entity
+              views_label: summary
+              items_per_page: '1'
+            weight: 3
+            additional: {  }
+          f471eb4f-5fd7-43ed-9463-7f24665c047b:
+            uuid: f471eb4f-5fd7-43ed-9463-7f24665c047b
+            region: content
+            configuration:
+              id: 'views_block:statement_expenses-block_1'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping:
+                nid: layout_builder.entity
+              views_label: ''
+              items_per_page: '1'
+            weight: 4
             additional: {  }
         third_party_settings: {  }
 id: node.statement.default
