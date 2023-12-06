@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.expense_categories.field_income
     - field.field.taxonomy_term.expense_categories.field_synonyms
     - taxonomy.vocabulary.expense_categories
     - views.view.category_chart
@@ -64,6 +65,24 @@ third_party_settings:
               items_per_page: none
             weight: 4
             additional: {  }
+          1ac5d648-2d7d-41e2-8cc1-a0ff4c172c67:
+            uuid: 1ac5d648-2d7d-41e2-8cc1-a0ff4c172c67
+            region: content
+            configuration:
+              id: 'field_block:taxonomy_term:expense_categories:field_income'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
         third_party_settings: {  }
 id: taxonomy_term.expense_categories.default
 targetEntityType: taxonomy_term
@@ -76,6 +95,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_income:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
     region: content
   field_synonyms:
     type: string

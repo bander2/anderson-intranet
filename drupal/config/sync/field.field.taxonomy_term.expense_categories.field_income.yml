@@ -1,0 +1,23 @@
+uuid: 97c82e37-852d-4bdb-9d3a-51dcdac6b5c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_income
+    - taxonomy.vocabulary.expense_categories
+id: taxonomy_term.expense_categories.field_income
+field_name: field_income
+entity_type: taxonomy_term
+bundle: expense_categories
+label: Income
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
 
-class CategoryGuesser {
+class CategoryGuesser implements GuesserInterface {
   private EntityTypeManagerInterface $entityTypeManager;
   private array $categories = [];
 

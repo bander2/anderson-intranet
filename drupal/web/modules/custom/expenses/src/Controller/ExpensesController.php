@@ -2,11 +2,11 @@
 
 namespace Drupal\expenses\Controller;
 
-use Crwlr\SchemaOrg\SchemaOrg;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\taxonomy\TermInterface;
 use NumberFormatter;
 
 /**
@@ -39,7 +39,8 @@ final class ExpensesController extends ControllerBase {
       ->getQuery()
       ->accessCheck()
       ->condition('vid', 'expense_categories')
-      ->condition('name', ['Ignore', 'Income'], 'NOT IN')
+      ->condition('name', ['Ignore'], 'NOT IN')
+      ->sort('field_income', 'DESC')
       ->sort('name')
       ->execute();
 
@@ -51,13 +52,15 @@ final class ExpensesController extends ControllerBase {
       ->condition('parent_id', $nids, 'IN')
       ->execute();
 
+    $categories = $this->entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadMultiple($tids);
+
     return [
       $this->entityTypeManager()
         ->getStorage('node')
         ->loadMultiple($nids),
-      $this->entityTypeManager()
-        ->getStorage('taxonomy_term')
-        ->loadMultiple($tids),
+      $categories,
       Paragraph::loadMultiple($pids),
     ];
   }
@@ -78,7 +81,8 @@ final class ExpensesController extends ControllerBase {
         $data[$category->id()][$statement->id()] = 0;
         foreach ($line_item_values as $line_item_value) {
           if ($expenses[$line_item_value['target_id']]->field_category->target_id == $category->id()) {
-            $data[$category->id()][$statement->id()] += $expenses[$line_item_value['target_id']]->field_negative_debit->value;
+            $field = $category->field_income->value ? 'field_debit' : 'field_negative_debit';
+            $data[$category->id()][$statement->id()] += $expenses[$line_item_value['target_id']]->{$field}->value;
           }
         }
       }
@@ -120,13 +124,19 @@ final class ExpensesController extends ControllerBase {
       }, array_shift($data)),
       '#attributes' => ['class' => ['views-table']],
     ];
+    $table['#header'][] = 'Avg.';
 
     $fmt = numfmt_create('en_US', NumberFormatter::CURRENCY);
     foreach ($data as $id => $row) {
       $table['#rows'][$id][-1] = array_shift($row)->toLink();
-      $table['#rows'][$id] += array_map(function ($cell) use ($fmt) {
+      $total = 0;
+      $table['#rows'][$id] += array_map(function ($cell) use ($fmt, &$total) {
+        $total += $cell;
         return ['data' => numfmt_format_currency($fmt, floatval($cell), 'USD')];
       }, $row);
+      $avg = $total / (count($row) -1);
+      $table['#rows'][$id][] = numfmt_format_currency($fmt, $avg, 'USD');
+
     }
 
     return $table;
@@ -169,6 +179,10 @@ final class ExpensesController extends ControllerBase {
     ];
 
     foreach (array_values($data) as $row_num => $row) {
+      if (reset($row)->field_income->value) {
+        continue;
+      }
+
       $charts_container['content']['real']["series_{$row_num}"] = [
         '#type' => 'chart_data',
         '#title' => array_shift($row)->label(),
