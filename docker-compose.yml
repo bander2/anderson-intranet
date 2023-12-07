@@ -6,7 +6,7 @@ services:
     image: mariadb
     volumes:
       - ./.data:/var/lib/mysql
-      - ./brendan.sql:/docker-entrypoint-initdb.d/brendan.sql
+      - ./brendan1.sql:/docker-entrypoint-initdb.d/brendan.sql
     environment:
       MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MARIADB_DATABASE: ${MYSQL_DATABASE}
