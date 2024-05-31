@@ -337,7 +337,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user
       tags: {  }
   block_1:
     id: block_1
@@ -351,5 +350,4 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user
       tags: {  }

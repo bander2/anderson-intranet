@@ -239,7 +239,6 @@ display:
             limit: false
             vids: {  }
             anyall: ','
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -301,7 +300,6 @@ display:
                   enabled: true
                   color: '#f07c33'
                   weight: 2
-              color_changer: 0
             display:
               title: ''
               title_position: out
@@ -327,6 +325,7 @@ display:
                 yellow_to: '85'
                 red_from: '0'
                 red_to: '50'
+              color_changer: false
             xaxis:
               title: ''
               labels_rotation: '0'

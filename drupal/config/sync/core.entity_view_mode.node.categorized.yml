@@ -6,5 +6,6 @@ dependencies:
     - node
 id: node.categorized
 label: Categorized
+description: ''
 targetEntityType: node
 cache: true

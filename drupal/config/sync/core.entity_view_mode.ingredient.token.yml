@@ -6,5 +6,6 @@ dependencies:
     - ingredient
 id: ingredient.token
 label: Token
+description: ''
 targetEntityType: ingredient
 cache: true

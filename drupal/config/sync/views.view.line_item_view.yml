@@ -218,7 +218,6 @@ display:
           title: ''
           default_argument_type: node
           default_argument_options: {  }
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -350,7 +349,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - user
       tags:
         - 'config:field.storage.paragraph.field_category'
   block_1:
@@ -366,7 +364,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - user
       tags:
         - 'config:field.storage.paragraph.field_category'
   block_2:
@@ -394,7 +391,6 @@ display:
                   enabled: true
                   color: '#f07c33'
                   weight: 2
-              color_changer: 0
             display:
               title: ''
               title_position: out
@@ -420,6 +416,7 @@ display:
                 yellow_to: '85'
                 red_from: '0'
                 red_to: '50'
+              color_changer: false
             xaxis:
               title: ''
               labels_rotation: '0'
@@ -445,6 +442,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - user
       tags:
         - 'config:field.storage.paragraph.field_category'

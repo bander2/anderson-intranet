@@ -376,7 +376,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user
       tags:
         - 'config:field.storage.paragraph.field_category'
         - 'config:field.storage.paragraph.field_negative_debit'
@@ -392,7 +391,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user
       tags:
         - 'config:field.storage.paragraph.field_category'
         - 'config:field.storage.paragraph.field_negative_debit'
